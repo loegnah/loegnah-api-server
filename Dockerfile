@@ -1,4 +1,4 @@
-FROM node:18 AS builder
+FROM node:18-alpine AS builder
 WORKDIR /app
 COPY . .
 RUN npm install -g pnpm && \
@@ -10,4 +10,5 @@ WORKDIR /app
 ENV NODE_ENV production
 COPY --from=builder /app ./
 RUN npm install -g pnpm
+EXPOSE 3000
 ENTRYPOINT ["pnpm","start:prod"]
